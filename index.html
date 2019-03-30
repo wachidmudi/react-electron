@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>App</title>
+    <link rel="stylesheet" href="./src/assets/css/bulma.min.css" />
+    <style>
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      html,
+      body,
+      #app,
+      #app > div,
+      #app > div > div,
+      #app > div > div > #home,
+      #app > div > div > #home > .columns,
+      #app > div > div > #home > .columns > .column {
+        height: 100%;
+      }
+      #title-bar {
+        -webkit-user-select: none;
+        -webkit-app-region: drag;
+      }
+      #min-btn,
+      #max-btn,
+      #restore-btn,
+      #close-btn,
+      #close-configs {
+        font-family: 'Segoe MDL2 Assets';
+        font-size: 12px;
+        width: 50px;
+        -webkit-app-region: no-drag;
+      }
+      #close-configs:hover,
+      #close-btn:hover {
+        background: #e81123;
+      }
+      #restore-btn {
+        display: none;
+      }
+      #app {
+        -webkit-app-region: no-drag;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+  </body>
+
+  <script src="/dist/app.min.js"></script>
+  <script src="./src/assets/titleBar.js"></script>
+</html>
