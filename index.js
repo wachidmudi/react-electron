@@ -23,7 +23,7 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
-    width: 800,
+    width: 1000,
     height: 600,
     frame: false,
     webPreferences: {
@@ -57,7 +57,7 @@ function createWindow() {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-  //configsWindow.webContents.openDevTools();
+  configsWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -99,10 +99,12 @@ app.on('activate', function() {
 // code. You can also put them in separate files and require them here.
 
 ipcMain.on('toggle-configs', (event, arg) => {
-  // Get the position of mainWindow
+  // Get the property of mainWindow
   let position = mainWindow.getPosition();
-  // Set configsWindow x and y position
+  let size = mainWindow.getSize();
+  // Set configsWindow property
   configsWindow.setPosition(position[0], position[1]);
+  configsWindow.setSize(size[0], size[1]);
   // Show it
   configsWindow.show();
 });

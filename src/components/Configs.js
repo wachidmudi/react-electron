@@ -14,15 +14,39 @@ class Configs extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Configuration</h1>
-        <a
-          onClick={() => this.close()}
-          id="close-configs"
-          className="button is-dark is-radiusless"
-        >
-          <span>&#xE8BB;</span>
-        </a>
+      <div className="section" style={{ height: '100vh' }}>
+        <div className="container">
+          <div class="columns">
+            <div class="column column is-one-quarter">
+              <aside class="menu">
+                <p class="menu-label">App Configuration</p>
+                <ul class="menu-list">
+                  <li>
+                    <a className="is-active">Appearance</a>
+                  </li>
+                  <li>
+                    <a>Text & Images</a>
+                  </li>
+                </ul>
+                <p class="menu-label">User Configuration</p>
+                <ul class="menu-list">
+                  <li>
+                    <a>Authentication</a>
+                  </li>
+                </ul>
+              </aside>
+            </div>
+            <div class="column">
+              <a
+                onClick={() => this.close()}
+                id="close-configs"
+                className="is-pulled-right"
+              >
+                <img src="./src/assets/images/close-circle.svg" alt="close" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -11,13 +11,7 @@
         display: none;
       }
       html,
-      body,
-      #app,
-      #app > div,
-      #app > div > div,
-      #app > div > div > #home,
-      #app > div > div > #home > .columns,
-      #app > div > div > #home > .columns > .column {
+      body {
         height: 100%;
       }
       #title-bar {
@@ -27,14 +21,12 @@
       #min-btn,
       #max-btn,
       #restore-btn,
-      #close-btn,
-      #close-configs {
+      #close-btn {
         font-family: 'Segoe MDL2 Assets';
         font-size: 12px;
         width: 50px;
         -webkit-app-region: no-drag;
       }
-      #close-configs:hover,
       #close-btn:hover {
         background: #e81123;
       }
@@ -48,7 +40,7 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app" class="has-background-light"></div>
   </body>
 
   <script src="/dist/app.min.js"></script>
