@@ -4,17 +4,15 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 class Home extends Component {
-  state = {};
-
-  showConfigs = () => {
+  showConfigs() {
     ipcRenderer.send('toggle-configs');
-  };
+  }
 
   render() {
     return (
       <div
         id="home"
-        className="container is-fullhd"
+        className="container is-fullhd has-background-light has-text-dark"
         style={{ height: '100vh', overflowY: 'hidden' }}
       >
         <div className="columns is-gapless" style={{ height: 'inherit' }}>
@@ -47,7 +45,7 @@ class Home extends Component {
                   alt="folder"
                 />
               </a>
-              <a className="button" onClick={() => this.showConfigs()}>
+              <a className="button" onClick={this.showConfigs}>
                 <img
                   width="25px"
                   src="./src/assets/images/config.svg"

@@ -2,11 +2,13 @@ import React from 'react';
 import TitleBar from './TitleBar';
 import Home from './Home';
 
+const Fragment = React.Fragment;
+
 const Index = () => (
-  <div>
+  <Fragment>
     <TitleBar />
     <Home />
-  </div>
+  </Fragment>
 );
 
 export default Index;

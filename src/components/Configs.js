@@ -3,14 +3,9 @@ import React, { Component } from 'react';
 const remote = window.require('electron').remote;
 
 class Configs extends Component {
-  close = () => {
-    document
-      .getElementById('close-configs')
-      .addEventListener('click', event => {
-        let window = remote.getCurrentWindow();
-        window.close();
-      });
-  };
+  handleClose() {
+    remote.getCurrentWindow().close();
+  }
 
   render() {
     return (
@@ -38,7 +33,7 @@ class Configs extends Component {
             </div>
             <div class="column">
               <a
-                onClick={() => this.close()}
+                onClick={this.handleClose}
                 id="close-configs"
                 className="is-pulled-right"
               >
