@@ -1,10 +1,15 @@
 const electron = require('electron');
 const ipcMain = electron.ipcMain;
-// const path = require('path');
-// const url = require('url');
+const path = require('path');
+const fs = require('fs');
 
 // Add serve.js
 const startServer = require('./serve');
+// Add message
+const {
+  PREFERENCE_SAVED,
+  PREFERENCE_SAVE_DATA_NEEDED
+} = require('./src/actions/types');
 
 // Module to control application life.
 const app = electron.app;
@@ -56,7 +61,7 @@ function createWindow() {
   );*/
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   configsWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
@@ -98,7 +103,16 @@ app.on('activate', function() {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-ipcMain.on('toggle-configs', (event, arg) => {
+let dataColor;
+ipcMain.on(PREFERENCE_SAVE_DATA_NEEDED, (event, preferences) => {
+  dataColor = preferences;
+});
+
+ipcMain.on('toggle-configs', (event, args) => {
+  const userDataPath = app.getPath('userData');
+  const filePath = path.join(userDataPath, 'preferences.json');
+  dataColor && fs.writeFileSync(filePath, JSON.stringify(dataColor));
+  mainWindow.webContents.send(PREFERENCE_SAVED, dataColor);
   // Get the property of mainWindow
   let position = mainWindow.getPosition();
   let size = mainWindow.getSize();

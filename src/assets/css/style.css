@@ -1,0 +1,35 @@
+::-webkit-scrollbar {
+  display: none;
+}
+html,
+body {
+  height: 100%;
+}
+#title-bar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+#min-btn,
+#max-btn,
+#restore-btn,
+#close-btn {
+  font-family: 'Segoe MDL2 Assets';
+  font-size: 12px;
+  width: 50px;
+  -webkit-app-region: no-drag;
+}
+#close-btn:hover {
+  background: #e81123;
+}
+#restore-btn {
+  display: none;
+}
+#app {
+  -webkit-app-region: no-drag;
+}
+.box-color {
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  height: 24px;
+  width: 24px;
+}

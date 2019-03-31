@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Index from './components/Index';
 import Configs from './components/Configs';
 
+const Fragment = React.Fragment;
+
 class ViewManager extends Component {
   static Views() {
     return {
@@ -22,9 +24,9 @@ class ViewManager extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <Fragment>
           <Route path="/" component={ViewManager.View} />
-        </div>
+        </Fragment>
       </Router>
     );
   }
