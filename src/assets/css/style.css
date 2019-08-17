@@ -3,6 +3,7 @@
 }
 html,
 body {
+  background-color: rgba(255, 255, 255, 0);
   height: 100%;
 }
 #title-bar {
@@ -27,9 +28,29 @@ body {
 #app {
   -webkit-app-region: no-drag;
 }
+.configs {
+  background-color: rgba(255, 255, 255);
+}
 .box-color {
   border-radius: 3px;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
   height: 24px;
   width: 24px;
+}
+.window-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.window-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 500ms, transform 500ms;
+}
+.window-exit {
+  opacity: 1;
+}
+.window-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 500ms, transform 500ms;
 }

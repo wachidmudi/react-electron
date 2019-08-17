@@ -8,7 +8,8 @@ const startServer = require('./serve');
 // Add message
 const {
   PREFERENCE_SAVED,
-  PREFERENCE_SAVE_DATA_NEEDED
+  PREFERENCE_SAVE_DATA_NEEDED,
+  SHOW_CONFIGS
 } = require('./src/actions/types');
 
 // Module to control application life.
@@ -28,9 +29,11 @@ function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
+    backgroundColor: '#2e2c29',
+    frame: false,
     width: 1000,
     height: 600,
-    frame: false,
+    show: false,
     webPreferences: {
       experimentalFeatures: true,
       nodeIntegration: true,
@@ -40,10 +43,10 @@ function createWindow() {
 
   configsWindow = new BrowserWindow({
     titleBarStyle: 'hidden',
-    frame: false,
     parent: mainWindow,
-    modal: true,
-    show: false
+    frame: false,
+    show: false,
+    transparent: true //https://github.com/electron/electron/issues/12130
   });
 
   mainWindow.setMenu(null);
@@ -72,9 +75,28 @@ function createWindow() {
     mainWindow = null;
   });
 
+  mainWindow.on('move', function() {
+    let position = mainWindow.getPosition();
+    configsWindow.setPosition(position[0], position[1] + 27);
+  });
+
+  mainWindow.on('ready-to-show', function() {
+    mainWindow.show();
+  });
+
   configsWindow.on('close', function(e) {
     e.preventDefault();
     configsWindow.hide();
+  });
+
+  configsWindow.on('show', () => {
+    setTimeout(() => {
+      configsWindow.setOpacity(1);
+    }, 300);
+  });
+
+  configsWindow.on('hide', () => {
+    configsWindow.setOpacity(0);
   });
 }
 
@@ -108,17 +130,21 @@ ipcMain.on(PREFERENCE_SAVE_DATA_NEEDED, (event, preferences) => {
   dataColor = preferences;
 });
 
-ipcMain.on('toggle-configs', (event, args) => {
+ipcMain.on('toggle-configs', () => {
+  // Save data
   const userDataPath = app.getPath('userData');
   const filePath = path.join(userDataPath, 'preferences.json');
   dataColor && fs.writeFileSync(filePath, JSON.stringify(dataColor));
   mainWindow.webContents.send(PREFERENCE_SAVED, dataColor);
+
   // Get the property of mainWindow
   let position = mainWindow.getPosition();
   let size = mainWindow.getSize();
+  // let configsBounds = mainWindow.getBounds();
   // Set configsWindow property
-  configsWindow.setPosition(position[0], position[1]);
-  configsWindow.setSize(size[0], size[1]);
-  // Show it
+  configsWindow.setPosition(position[0], position[1] + 27);
+  configsWindow.setSize(size[0], size[1] - 27);
+
+  configsWindow.webContents.send(SHOW_CONFIGS, 'ping');
   configsWindow.show();
 });
